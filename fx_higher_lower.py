@@ -57,6 +57,9 @@ def get_higher_lower():
         lambda x: 'Higher' if x > 0 else 'Lower' if x < 0 else 'Same'
     )
 
+    # Remove the first row which has no previous day for comparison
+    df = df.iloc[1:].reset_index(drop=True)
+
     # Calculate streaks
     streak_col = 'Streak'
     streaks = []
@@ -86,3 +89,5 @@ def get_higher_lower():
     final_df.to_csv(new_file_path, index=False)
 
     print(f"\nOutput saved to '{new_filename}' with columns: {', '.join(final_df.columns)}.")
+
+get_higher_lower()
